@@ -1,10 +1,10 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using _66088226_Kannapich_Baosri.Models;
-using _66088226_Kannapich_Baosri.ViewModels;
-using _66088226_Kannapich_Baosri.Models.Db;
+using BadmintonBooking.Models;
+using BadmintonBooking.ViewModels;
+using BadmintonBooking.Models.Db;
 
-namespace _66088226_Kannapich_Baosri.Controllers;
+namespace BadmintonBooking.Controllers;
 
 public class AccountController : Controller
 {

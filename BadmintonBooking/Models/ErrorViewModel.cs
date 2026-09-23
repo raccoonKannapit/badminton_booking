@@ -1,4 +1,4 @@
-namespace _66088226_Kannapich_Baosri.Models;
+namespace BadmintonBooking.Models;
 
 public class ErrorViewModel
 {

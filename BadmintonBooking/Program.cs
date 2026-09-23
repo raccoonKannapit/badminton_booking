@@ -1,4 +1,4 @@
-using _66088226_Kannapich_Baosri.Models.Db;
+using BadmintonBooking.Models.Db;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

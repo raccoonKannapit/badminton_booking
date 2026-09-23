@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace _66088226_Kannapich_Baosri.Models.Db;
+namespace BadmintonBooking.Models.Db;
 
 public partial class Booking
 {

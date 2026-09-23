@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql.Scaffolding.Internal;
 
-namespace _66088226_Kannapich_Baosri.Models.Db;
+namespace BadmintonBooking.Models.Db;
 
 public partial class Csi402dbContext : DbContext
 {

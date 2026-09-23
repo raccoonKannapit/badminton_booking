@@ -1,4 +1,4 @@
-namespace _66088226_Kannapich_Baosri.ViewModels
+namespace BadmintonBooking.ViewModels
 {
     public class LabUserViewModel
     {
