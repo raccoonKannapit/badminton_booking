@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Admin</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/_66088226_Kannapich_Baosri.styles.css" asp-append-version="true" />
+</head>
+@RenderSection("Scripts", required: false)
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- ===== Header / Navbar ===== -->
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark border-bottom shadow-sm"
+             style="background-color: rgb(40, 40, 40);">
+            <div class="container-fluid">
+
+                <!-- Brand -->
+                <a class="navbar-brand text-white"
+                   asp-controller="Admin" asp-action="Dashboard"
+                   style="font-weight: bold;">
+                    Admin Panel
+                </a>
+
+                <!-- Toggle -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#adminNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Menu -->
+                <div class="collapse navbar-collapse" id="adminNavbar">
+                    <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+                        <li class="nav-item">
+                            <a class="nav-link text-white"
+                               asp-controller="Admin" asp-action="Bookings">Bookings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white"
+                               asp-controller="Admin" asp-action="WalkInBooking">Walk-in</a>
+                        </li>
+                        @if (Context.Session.GetInt32("AccessLevel") >= 3)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-white"
+                                   asp-controller="Admin" asp-action="UserManagement">User Management</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white"
+                                   asp-controller="Admin" asp-action="Dashboard">Dashboard</a>
+                            </li>
+                        }
+                    </ul>
+
+                    <!-- Right side -->
+                    <div class="d-flex align-items-center gap-3">
+                        <span class="text-white">
+                            @Context.Session.GetString("Username")
+                        </span>
+                        <a asp-controller="Account" asp-action="User_home"
+                           class="btn btn-outline-light btn-sm">&larr; Back to User Site</a>
+                        <a class="btn btn-danger btn-sm"
+                           asp-controller="Account" asp-action="Logout">Logout</a>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <!-- ===== Main Content ===== -->
+    <main role="main" class="container-fluid py-3">
+        @RenderBody()
+    </main>
+
+    <!-- ===== Footer ===== -->
+    <footer class="border-top text-muted mt-auto">
+        <div class="container py-3 text-center">
+            &copy; 2026 - Admin Panel
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

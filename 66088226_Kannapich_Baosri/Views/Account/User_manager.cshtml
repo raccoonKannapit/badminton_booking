@@ -1,0 +1,112 @@
+@{
+    ViewData["Title"] = "User Manager";
+    Layout = "_Kannapich";
+}
+
+<h2 class="text-center">User Manager</h2>
+<table class="table table-bordered table-striped table-hover ">
+    <thead>
+        <tr class="table-dark">
+            <th>userId</th>
+            <th>username</th>
+            <th>password</th>
+            <th>email</th>
+            <th>phone</th>
+            <th>role</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>user1</td>
+            <td>1234</td>
+            <td>user1@gmail.com</td>
+            <td>0812345678</td>
+            <td>user</td>
+            <td>
+                <button class="btn btn-primary">Edit</button>
+                <button class="btn btn-danger" onclick="deleteUser(1)">Delete</button>
+            </td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>user2</td>
+            <td>2345</td>
+            <td>user2@gmail.com</td>
+            <td>0823456789</td>
+            <td>admin</td>
+            <td>
+                <button class="btn btn-primary">Edit</button>
+                <button class="btn btn-danger" onclick="deleteUser(2)">Delete</button>
+            </td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>user3</td>
+            <td>3456</td>
+            <td>user3@gmail.com</td>
+            <td>0834567890</td>
+            <td>user</td>
+            <td>
+                <button class="btn btn-primary">Edit</button>
+                <button class="btn btn-danger" onclick="deleteUser(3)">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr style="text-align: center;">
+            <th colspan="7"><button class="btn btn-success" onclick="addUser()">Add New User</button></th>
+        </tr>
+    </tfoot>
+</table>
+
+<div class="add-user-form" style="display: none;" id="addUserForm">
+    <h3>Add New User</h3>
+    <form>
+        <div class="mb-3">
+            <label for="newUsername" class="form-label">Username</label>
+            <input type="text" class="form-control" id="newUsername"/>
+        </div>
+        <div class="mb-3">
+            <label for="newPassword" class="form-label">Password</label>
+            <input type="password" class="form-control" id="newPassword"/>
+        </div>
+        <div class="mb-3">
+            <label for="newEmail" class="form-label">Email</label>
+            <input type="email" class="form-control" id="newEmail"/>
+        </div>
+        <div class="mb-3">
+            <label for="newPhone" class="form-label">Phone</label>
+            <input type="tel" class="form-control" id="newPhone"/>
+        </div>
+        <div class="mb-3">
+            <label for="newRole" class="form-label">Role</label>
+            <select class="form-select" id="newRole">
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+                <option value="owner">Owner</option>
+            </select>
+        <button type="submit" class="btn btn-primary mt-4" onclick="submitNewUser()">Add User</button>
+    </form>
+
+</div>
+
+@section Scripts{
+    <script>
+        function deleteUser(userId) {
+            if (confirm("Are you sure you want to delete user with ID " + userId + "?")) {
+                // Perform deletion operation here
+                alert("User with ID " + userId + " has been deleted.");
+            }
+        }
+
+        function addUser() {
+            document.getElementById("addUserForm").style.display = "block";
+        }
+        function submitNewUser() {
+            alert("New user added successfully!");
+            document.getElementById("addUserForm").style.display = "none";
+        }
+    </script>
+}

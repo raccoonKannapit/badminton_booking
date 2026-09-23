@@ -1,0 +1,112 @@
+@{
+    Layout = "_Kannapich";
+    ViewData["Title"] = "Home";
+}
+
+<!-- Hero Banner -->
+<div class="rounded-3 p-4 mb-4 text-white"
+     style="background: linear-gradient(135deg, #1a6fc4 0%, #41ace5 100%);">
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+        <div>
+            <h2 class="mb-1 fw-bold">ยินดีต้อนรับ, @Context.Session.GetString("Username") !</h2>
+            <p class="mb-0 opacity-75">ระบบจองสนามแบดมินตัน — จองสนามง่าย รวดเร็ว สะดวกทุกที่</p>
+        </div>
+        <div class="text-end">
+            <div class="bg-white bg-opacity-25 rounded-3 p-3" style="min-width:200px;">
+                @* <p class="mb-1 small"><i class="bi bi-person-fill me-1"></i> @ViewBag.Username</p>
+                <p class="mb-1 small"><i class="bi bi-envelope-fill me-1"></i> @ViewBag.Email</p>
+                <p class="mb-0 small"><i class="bi bi-telephone-fill me-1"></i> @ViewBag.Phone</p> *@
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Action Cards -->
+<h5 class="fw-semibold mb-3 text-secondary">เมนูหลัก</h5>
+<div class="row g-3 mb-3 justify-content-center">
+
+    <div class="col-8 col-md-4">
+        <a asp-controller="Account" asp-action="Courts" class="text-decoration-none">
+            <div class="card h-100 border-0 shadow-sm text-center p-3 action-card">
+                <div class="card-body">
+                    <div class="display-5 mb-2">🏸</div>
+                    <h6 class="fw-bold text-dark mb-1">จองสนาม</h6>
+                    <p class="small text-muted mb-0">เลือกสนามและเวลาที่ต้องการ</p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-8 col-md-4">
+        <a asp-controller="Account" asp-action="Booking" class="text-decoration-none">
+            <div class="card h-100 border-0 shadow-sm text-center p-3 action-card">
+                <div class="card-body">
+                    <div class="display-5 mb-2">📋</div>
+                    <h6 class="fw-bold text-dark mb-1">ประวัติการจอง</h6>
+                    <p class="small text-muted mb-0">ดูรายการจองทั้งหมดของคุณ</p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-8 col-md-4">
+        <a asp-controller="Account" asp-action="setting" class="text-decoration-none">
+            <div class="card h-100 border-0 shadow-sm text-center p-3 action-card">
+                <div class="card-body">
+                    <div class="display-5 mb-2">⚙️</div>
+                    <h6 class="fw-bold text-dark mb-1">ตั้งค่าบัญชี</h6>
+                    <p class="small text-muted mb-0">แก้ไขข้อมูลส่วนตัว</p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+</div>
+
+<!-- Info Section -->
+<div class="row g-3">
+    <div class="col-md-6">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header fw-semibold" style="background-color:#eef5ff;">
+                เวลาเปิด-ปิด
+            </div>
+            <div class="card-body">
+                <table class="table table-sm table-borderless mb-0">
+                    <tbody>
+                        <tr>
+                            @* <td class="text-muted">จันทร์ – ศุกร์</td> *@
+                            <td class="fw-semibold">09:00 – 22:00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header fw-semibold" style="background-color:#eef5ff;">
+                ราคาและข้อมูลสนาม
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled mb-0">
+                    <li class="mb-2"> ราคา <strong>200 บาท / ชั่วโมง</strong></li>
+                    @* <li class="mb-2"> ที่ตั้ง: อาคารกีฬา ชั้น 2</li> *@
+                    <li class="mb-2"> ติดต่อ: 02-xxx-xxxx</li>
+                    <li class="mb-0"> รับชำระ: เงินสด / โอน</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .action-card {
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+        cursor: pointer;
+    }
+    .action-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 .5rem 1.5rem rgba(0,0,0,.12) !important;
+    }
+</style>

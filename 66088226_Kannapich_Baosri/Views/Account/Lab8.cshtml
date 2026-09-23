@@ -1,0 +1,36 @@
+@{
+    ViewData["Title"] = "Lab 5 2";
+    Layout = "_Kannapich";
+}
+@using _66088226_Kannapich_Baosri.Models.Db
+@model IEnumerable<_66088226_Kannapich_Baosri.Models.Db.Usersdatum>
+<h1 class="text-center">user list</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>UserId</th>
+            <th>Username</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.UserId</td>
+                <td>@user.Username</td>
+                <td>@user.Phone</td>
+                <td>@user.Email</td>
+                <td>@user.Role</td>
+                <td>
+                    <a asp-controller="Account" asp-action="EditUser" asp-route-UID="@user.UserId" class="btn btn-primary">Edit</a>
+                    <a asp-controller="Account" asp-action="DeleteUser" asp-route-UID="@user.UserId" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

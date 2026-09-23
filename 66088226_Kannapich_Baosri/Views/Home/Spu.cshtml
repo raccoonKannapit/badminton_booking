@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "SPU Page";
+}
+
+<div class="text-center">
+    <h1>ผลการประเมินของ @ViewBag.Name</h1>
+    <h4><strong>กลุ่มเรียน:</strong> @ViewBag.Section</h4>
+    <h4><strong>ชั้นปี:</strong> @ViewBag.Year</h4>
+    <h4><strong>ภาษาที่ถนัด:</strong> @ViewBag.Language</h4>
+    <h4>คะแนนรวม: <strong>@ViewBag.TotalScore</strong> คะแนน</h4>
+    <h4>เกรดที่ได้: <strong>@ViewBag.Grade</strong></h4>
+
+    @if (ViewBag.Grade == "F")
+    {
+        <h2 style="color:red">งานที่ได้น้อยกว่า 5 คะแนน:</h2>
+        <ul>
+            @foreach (var info in ViewBag.LowScoresInfo)
+            {
+                <li>@info</li>
+            }
+        </ul>
+    }
+</div>

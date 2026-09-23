@@ -1,0 +1,38 @@
+@{
+    ViewData["Title"] = "Register";
+    Layout = "_Kannapich";
+}
+@model _66088226_Kannapich_Baosri.ViewModels.UserDataViewModel
+<div class="container" style="border: 1px solid black; padding: 20px; width: 600px; height: 800px; margin-top: 50px; border-radius: 30px; background-color: #f8f9fa;">
+    <form asp-controller="Account" asp-action="EditUser">
+        <div>
+            <label for="exampleInputUserId1" class="form-label">UserId</label>
+            <input type="text" asp-for="UserId" class="form-control" style="border-radius: 20px;" readonly/>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputUsername1" class="form-label">Username</label>
+            <input type="text" asp-for="Username" class="form-control" style="border-radius: 20px;"/>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input type="email" asp-for="Email" class="form-control" style="border-radius: 20px;"/>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPhone1" class="form-label">Phone</label>
+            <input type="tel" asp-for="Phone" class="form-control" style="border-radius: 20px;"/>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="text" asp-for="Password" class="form-control" style="border-radius: 20px;"/>
+        </div>
+        <div>
+            <label for="exampleInputRole1" class="form-label">Role</label>
+            <select name="Role" class="form-control" style="border-radius:20px;">
+                <option value="1">User</option>
+                <option value="2">Admin</option>
+            </select>
+        </div>
+
+        <br><span style="display: block; text-align: center;"><button type="submit" class="btn btn-primary">confirm</button></span>
+    </form>
+</div>

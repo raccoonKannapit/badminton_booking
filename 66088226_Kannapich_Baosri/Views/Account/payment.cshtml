@@ -1,0 +1,66 @@
+@model _66088226_Kannapich_Baosri.ViewModels.PaymentViewModel
+@{
+    ViewData["Title"] = "Payment";
+    Layout = "_Kannapich";
+}
+
+<div class="container mt-5" style="max-width: 500px;">
+    <h4 class="mb-4">Payment Summary</h4>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <table class="table table-borderless mb-0">
+                <tr>
+                    <td class="text-muted">Court</td>
+                    <td><strong>@Model.CourtId</strong></td>
+                </tr>
+                <tr>
+                    <td class="text-muted">Date</td>
+                    <td><strong>@(DateOnly.TryParse(Model.BookingDate, out var bd) ? bd.ToString("dd/MM/yyyy") : Model.BookingDate)</strong></td>
+                </tr>
+                <tr>
+                    <td class="text-muted">Time Slots</td>
+                    <td>
+                        <div class="d-flex flex-wrap gap-1">
+                            @foreach (var h in Model.SelectedHours)
+                            {
+                                <span class="badge bg-primary">@(h.ToString("D2")):00</span>
+                            }
+                        </div>
+                    </td>
+                </tr>
+                <tr class="border-top">
+                    <td class="text-muted">Base Price</td>
+                    <td><strong>@Model.BasePrice.ToString("N0") ฿</strong></td>
+                </tr>
+                @if (Model.AppliedPromotions.Any())
+                {
+                    foreach (var promo in Model.AppliedPromotions)
+                    {
+                        <tr class="text-success">
+                            <td>@promo.Name</td>
+                            <td><strong>- @promo.Discount ฿</strong></td>
+                        </tr>
+                    }
+                }
+                <tr class="border-top">
+                    <td class="text-muted fw-bold">Total</td>
+                    <td><strong class="text-success fs-5">@Model.Price.ToString("N0") ฿</strong></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <form action="/Account/payment" method="post">
+        <input type="hidden" name="UserId"      value="@Model.UserId" />
+        <input type="hidden" name="CourtId"     value="@Model.CourtId" />
+        <input type="hidden" name="BookingDate" value="@Model.BookingDate" />
+        <input type="hidden" name="SelectedHoursRaw" value="@Model.SelectedHoursRaw" />
+        <input type="hidden" name="Price"       value="@Model.Price" />
+
+        <div class="d-flex gap-2">
+            <a asp-controller="Account" asp-action="Courts" class="btn btn-outline-secondary w-50">Cancel</a>
+            <button type="submit" class="btn btn-primary w-50">Confirm & Pay</button>
+        </div>
+    </form>
+</div>

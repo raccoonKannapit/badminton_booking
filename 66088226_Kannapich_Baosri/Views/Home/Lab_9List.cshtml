@@ -1,0 +1,32 @@
+@{
+    ViewData["Title"] = "Lab 9 List";
+    Layout = "_Layout";
+}
+@model IEnumerable<_66088226_Kannapich_Baosri.ViewModels.Lab9UserViewModel>
+<h1>Lab 9 List</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>UserId</th>
+            <th>Password</th>
+            <th>Name</th>
+            <th>Lastname</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.UserId</td>
+                <td>@item.Password</td>
+                <td>@item.Name</td>
+                <td>@item.Lastname</td>
+                <td>
+                    <a asp-controller="Home" asp-action="Lab_10" asp-route-UID="@item.UserId" class="btn btn-primary">Edit</a>
+                    <a asp-controller="Home" asp-action="Lab_10D" asp-route-UID="@item.UserId" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,71 @@
+@{
+    ViewData["Title"] = "Booking";
+    Layout = "_Kannapich";
+}
+@model _66088226_Kannapich_Baosri.ViewModels.BookingViewModel
+<h1 class="text-center">Booking Form</h1>
+<div class="container">
+    <form asp-controller="Account" asp-action="Bookingform">
+        <div class="mb-3">
+            <label for="courtId" class="form-label">Court ID</label>
+            <input type="text" asp-for="CourtId" class="form-control" id="courtId" name="courtId" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="userId" class="form-label">User ID</label>
+            <input type="text" asp-for="UserId" class="form-control" id="userId" name="userId" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="bookingDate" class="form-label">Booking Date</label>
+            <input type="date" class="form-control" id="bookingDate" name="bookingDate"
+                   value="@Model.BookingDate.ToString("yyyy-MM-dd")">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Time Slots</label>
+            <input type="hidden" id="selectedHoursRaw" name="SelectedHoursRaw" value="">
+            <div class="d-flex flex-wrap gap-2">
+                @for (int h = 9; h <= 22; h++) {
+                    var isTaken = Model.TakenHours.Contains(h);
+                    <button type="button"
+                            class="btn @(isTaken ? "btn-danger" : "btn-outline-primary") btn-hour"
+                            data-hour="@h"
+                            @(isTaken ? "disabled" : "")>
+                        @(h.ToString("D2")):00
+                    </button>
+                }
+            </div>
+            <small class="text-muted mt-2 d-block">Click to select/deselect slots. Red = already booked.</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+<script>
+    // Reload page with selected date to refresh taken slots
+    const today = new Date().toISOString().split('T')[0];
+    const dateInput = document.getElementById('bookingDate');
+    dateInput.min = today;
+    if (!dateInput.value) dateInput.value = today;
+
+    dateInput.addEventListener('change', function () {
+        const url = new URL(window.location.href);
+        url.searchParams.set('date', this.value);
+        window.location.href = url.toString();
+    });
+
+    // Multi-select toggle
+    const selectedHours = new Set();
+
+    document.querySelectorAll('.btn-hour:not([disabled])').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const hour = parseInt(this.dataset.hour);
+            if (selectedHours.has(hour)) {
+                selectedHours.delete(hour);
+                this.classList.replace('btn-success', 'btn-outline-primary');
+            } else {
+                selectedHours.add(hour);
+                this.classList.replace('btn-outline-primary', 'btn-success');
+            }
+            document.getElementById('selectedHoursRaw').value = [...selectedHours].join(',');
+        });
+    });
+</script>

@@ -1,0 +1,116 @@
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "_Admin";
+}
+@model _66088226_Kannapich_Baosri.ViewModels.DashboardViewModel
+
+<h2 class="mb-4 text-white">Dashboard</h2>
+
+<!-- ── Stat Cards ── -->
+<div class="row g-3 mb-4">
+    <div class="col-6 col-md-3">
+        <div class="card border-0 shadow text-white text-center p-3"
+             style="background: linear-gradient(135deg, #1a6fc4, #41ace5);">
+            <div class="fs-1 fw-bold">@Model.TodayBookings</div>
+            <div class="small opacity-75">Today's Bookings</div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="card border-0 shadow text-white text-center p-3"
+             style="background: linear-gradient(135deg, #1a9e5c, #4ccc8a);">
+            <div class="fs-1 fw-bold">@Model.TodayRevenue.ToString("N0") ฿</div>
+            <div class="small opacity-75">Today's Revenue</div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="card border-0 shadow text-white text-center p-3"
+             style="background: linear-gradient(135deg, #7b2fbe, #b06afc);">
+            <div class="fs-1 fw-bold">@Model.TotalUsers</div>
+            <div class="small opacity-75">Total Users</div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="card border-0 shadow text-white text-center p-3"
+             style="background: linear-gradient(135deg, #c47a1a, #f0ad4e);">
+            <div class="fs-1 fw-bold">@Model.TotalCourts</div>
+            <div class="small opacity-75">Total Courts</div>
+        </div>
+    </div>
+</div>
+
+<!-- ── Today's Court Occupancy ── -->
+<h5 class="mb-3 text-white">
+    Today's Court Occupancy
+    <small class="opacity-75 fw-normal fs-6">— @DateTime.Today.ToString("dd/MM/yyyy")</small>
+</h5>
+<div class="row g-3 mb-4">
+    @foreach (var court in Model.CourtOccupancy)
+    {
+        var slotCount  = court.BookedSlots.Count;
+        var totalSlots = 14;
+        var pct        = (int)((double)slotCount / totalSlots * 100);
+        var barColor   = pct >= 80 ? "bg-danger" : pct >= 50 ? "bg-warning" : "bg-success";
+
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card border-0 shadow p-3" style="background-color: #1e1e2e; color: #e0e0f0;">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <strong>@court.CourtName</strong>
+                    <span class="badge @barColor">@slotCount / @totalSlots</span>
+                </div>
+                <div class="progress mb-3" style="height: 6px; background-color: #3a3a4a;">
+                    <div class="progress-bar @barColor" style="width: @pct%;"></div>
+                </div>
+                <div class="d-flex flex-wrap gap-1">
+                    @for (int h = 9; h <= 22; h++)
+                    {
+                        var slot     = h.ToString("D2") + ":00";
+                        var isBooked = court.BookedSlots.Contains(slot);
+                        <span class="badge" style="@(isBooked ? "background-color:#e74c3c;" : "background-color:#2e2e3e; color:#888;")">@slot</span>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<!-- ── Recent Bookings ── -->
+<h5 class="mb-3 text-white">Recent Bookings</h5>
+<div class="card border-0 shadow" style="background-color: #1e1e2e;">
+    <table class="table table-hover mb-0" style="color: #e0e0f0;">
+        <thead style="background-color: #2a2a3e; color: #aab;">
+            <tr>
+                <th>Booking ID</th>
+                <th>User</th>
+                <th>Court</th>
+                <th>Date</th>
+                <th>Slots</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var b in Model.RecentBookings)
+            {
+                <tr style="border-color: #2e2e3e;">
+                    <td class="small" style="color: #888;">@b.BookingId</td>
+                    <td>@b.UserId</td>
+                    <td>@b.CourtId</td>
+                    <td>@b.BookingDate.ToString("dd/MM/yyyy")</td>
+                    <td>
+                        <div class="d-flex flex-wrap gap-1">
+                            @foreach (var slot in b.Slots)
+                            {
+                                <span class="badge bg-primary">@slot</span>
+                            }
+                        </div>
+                    </td>
+                    <td class="fw-bold" style="color: #4ccc8a;">@b.Price.ToString("N0") ฿</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    body { background-color: #12121e; }
+    .table-hover tbody tr:hover { background-color: #2a2a3e !important; }
+</style>

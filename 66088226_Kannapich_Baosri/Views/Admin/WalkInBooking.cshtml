@@ -1,0 +1,85 @@
+@{
+    ViewData["Title"] = "Walk-in Booking";
+    Layout = "_Admin";
+}
+@model _66088226_Kannapich_Baosri.ViewModels.EditBookingViewModel
+
+<h2 class="mb-4">Walk-in Booking</h2>
+
+<div class="container" style="max-width: 600px;">
+    <form asp-controller="Admin" asp-action="WalkInBooking" method="post">
+
+        <div class="mb-3">
+            <label class="form-label">Court</label>
+            <select class="form-control" id="courtSelect" name="CourtId">
+                @foreach (var court in Model.Courts)
+                {
+                    if (court.CourtId == Model.CourtId)
+                    {
+                        <option value="@court.CourtId" selected>@court.CourtId — @court.CourtName</option>
+                    }
+                    else
+                    {
+                        <option value="@court.CourtId">@court.CourtId — @court.CourtName</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Date</label>
+            <input type="date" class="form-control" id="bookingDate" name="BookingDate"
+                   value="@Model.BookingDate.ToString("yyyy-MM-dd")">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Time Slots</label>
+            <input type="hidden" id="selectedHoursRaw" name="SelectedHoursRaw" value="">
+            <div class="d-flex flex-wrap gap-2">
+                @for (int h = 9; h <= 22; h++) {
+                    var isTaken = Model.TakenHours.Contains(h);
+                    <button type="button"
+                            class="btn @(isTaken ? "btn-danger" : "btn-outline-primary") btn-hour"
+                            data-hour="@h"
+                            @(isTaken ? "disabled" : "")>
+                        @(h.ToString("D2")):00
+                    </button>
+                }
+            </div>
+            <small class="text-muted mt-2 d-block">Click to select/deselect. Red = already booked.</small>
+        </div>
+
+        <div class="d-flex gap-2 mt-4">
+            <a asp-controller="Admin" asp-action="Bookings" class="btn btn-outline-secondary w-50">Cancel</a>
+            <button type="submit" class="btn btn-primary w-50">Confirm Booking</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    function reloadSlots() {
+        const url = new URL(window.location.href);
+        url.searchParams.set('date', document.getElementById('bookingDate').value);
+        url.searchParams.set('courtId', document.getElementById('courtSelect').value);
+        window.location.href = url.toString();
+    }
+
+    document.getElementById('bookingDate').addEventListener('change', reloadSlots);
+    document.getElementById('courtSelect').addEventListener('change', reloadSlots);
+
+    const selectedHours = new Set();
+
+    document.querySelectorAll('.btn-hour:not([disabled])').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const hour = parseInt(this.dataset.hour);
+            if (selectedHours.has(hour)) {
+                selectedHours.delete(hour);
+                this.classList.replace('btn-success', 'btn-outline-primary');
+            } else {
+                selectedHours.add(hour);
+                this.classList.replace('btn-outline-primary', 'btn-success');
+            }
+            document.getElementById('selectedHoursRaw').value = [...selectedHours].join(',');
+        });
+    });
+</script>

@@ -1,0 +1,52 @@
+@{
+    ViewData["Title"] = "Courts";
+    Layout = "_Kannapich";
+}
+@model IEnumerable<_66088226_Kannapich_Baosri.ViewModels.CourtsViewModel>
+
+<!-- Hero Banner -->
+<div class="rounded-3 p-4 mb-4 text-white"
+     style="background: linear-gradient(135deg, #1a6fc4 0%, #41ace5 100%);">
+    <div class="d-flex align-items-center gap-3">
+        <div class="display-5">🏸</div>
+        <div>
+            <h2 class="mb-1 fw-bold">เลือกสนาม</h2>
+            <p class="mb-0 opacity-75">เลือกสนามแบดมินตันที่ต้องการจองได้เลย</p>
+        </div>
+    </div>
+</div>
+
+<h5 class="fw-semibold mb-3 text-secondary">สนามทั้งหมด</h5>
+
+<div class="row g-3">
+    @foreach (var courts in Model)
+    {
+        <div class="col-12 col-md-4">
+            <div class="card h-100 border-0 shadow-sm court-card">
+                <div class="card-header fw-semibold" style="background-color:#eef5ff;">
+                    🏟️ ข้อมูลสนาม
+                </div>
+                <div class="card-body">
+                    <h5 class="fw-bold mb-1">@courts.CourtName</h5>
+                    <p class="text-muted small mb-3">Court ID: @courts.CourtId</p>
+                    <a asp-controller="Account" asp-action="Bookingform"
+                       asp-route-CID="@courts.CourtId" asp-route-UID="@Context.Session.GetString("UserId")"
+                       class="btn btn-primary w-100">
+                        จองสนามนี้
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    .court-card {
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+        cursor: pointer;
+    }
+    .court-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 .5rem 1.5rem rgba(0,0,0,.12) !important;
+    }
+</style>

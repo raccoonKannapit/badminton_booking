@@ -1,0 +1,53 @@
+@{
+    ViewData["Title"] = "Booking";
+    Layout = "_Kannapich";
+}
+@model IEnumerable<_66088226_Kannapich_Baosri.ViewModels.BookingViewModel>
+
+<!-- Hero Banner -->
+<div class="rounded-3 p-4 mb-4 text-white"
+     style="background: linear-gradient(135deg, #1a6fc4 0%, #41ace5 100%);">
+    <div class="d-flex align-items-center gap-3">
+        <div class="display-5">📋</div>
+        <div>
+            <h2 class="mb-1 fw-bold">ประวัติการจอง</h2>
+            <p class="mb-0 opacity-75">รายการจองสนามแบดมินตันของคุณ</p>
+        </div>
+    </div>
+</div>
+
+<h5 class="fw-semibold mb-3 text-secondary">การจองทั้งหมด</h5>
+
+<div class="row g-3">
+    @foreach (var item in Model)
+    {
+        <div class="col-12 col-md-4">
+            <div class="card h-100 border-0 shadow-sm booking-card">
+                <div class="card-header fw-semibold" style="background-color:#eef5ff;">
+                    🏟️ Court @item.CourtId
+                </div>
+                <div class="card-body">
+                    <p class="text-muted small mb-1">Booking ID: @item.BookingId</p>
+                    <p class="mb-1"><strong>📅</strong> @item.BookingDate</p>
+                    <div class="mb-1 d-flex flex-wrap gap-1">
+                        @foreach (var slot in item.Slots)
+                        {
+                            <span class="badge bg-primary">@slot</span>
+                        }
+                    </div>
+                    <p class="mb-0 mt-3 text-success fw-bold fs-5">@item.Price.ToString("N0") ฿</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    .booking-card {
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .booking-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 .5rem 1.5rem rgba(0,0,0,.12) !important;
+    }
+</style>

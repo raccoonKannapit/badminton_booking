@@ -1,0 +1,56 @@
+@{
+    ViewData["Title"] = "Lab 5";
+    Layout = "_Kannapich";
+}
+@* @model IEnumerable<_66088226_Kannapich_Baosri.ViewModels.LabUserViewModel> *@
+@model _66088226_Kannapich_Baosri.ViewModels.LabUserViewModel
+<h1 class="text-center">Lab 5</h1>
+@* <div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Weight</th>
+                <th>Height</th>
+                <th>Age</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.UserId</td>
+                    <td>@item.Username</td>
+                    <td>@item.Email</td>
+                    <td>@item.Phone</td>
+                    <td>@item.Weight</td>
+                    <td>@item.Height</td>
+                    <td>@item.Age</td>
+                    <td>@item.Role</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div> *@
+
+<form asp-controller="Account" asp-action="Lab_5">
+    UserId <input type="number" asp-for="UserId" class="form-control" placeholder="User ID" />
+    Name <input type="text" asp-for="Username" class="form-control" placeholder="Username" />
+    Email <input type="email" asp-for="Email" class="form-control" placeholder="Email" />
+    @* Phone <input type="text" asp-for="Phone" class="form-control" placeholder="Phone" />
+    Weight <input type="number" asp-for="Weight" class="form-control" placeholder="Weight" />
+    Height <input type="number" asp-for="Height" class="form-control" placeholder="Height" />
+    Age <input type="number" asp-for="Age" class="form-control" placeholder="Age" /> *@
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<div>
+    @ViewBag.UserId <br>
+    @ViewBag.Username <br>
+    @ViewBag.Email
+</div>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - _66088226_Kannapich_Baosri</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/_66088226_Kannapich_Baosri.styles.css" asp-append-version="true" />
+</head>
+@RenderSection("Scripts", required: false)
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- ===== Header / Navbar ===== -->
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light border-bottom shadow-sm"
+             style="background-color: rgb(65, 144, 229);">
+            <div class="container-fluid">
+
+                <!-- Brand -->
+                <a class="navbar-brand text-white"
+                   asp-controller="Account" asp-action="User_home"
+                   style="font-weight: bold;">
+                    ระบบจองสนามแบดมินตัน
+                </a>
+
+                <!-- Toggle -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#mainNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Menu -->
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+                        <li class="nav-item">
+                            <a class="nav-link text-white"
+                               asp-controller="Account" asp-action="User_home">Home</a>
+                        </li>
+                        @* <li class="nav-item">
+                            <a class="nav-link text-white"
+                               asp-controller="Account" asp-action="Test1">Test1</a>
+                        </li>
+                        <li>
+                            <a class="nav-link text-white"
+                               asp-controller="Account" asp-action="Lab_4">Lab 4</a>
+                        </li>
+                        <li>
+                            <a class="nav-link text-white"
+                               asp-controller="Account" asp-action="Lab_5">Lab 5</a>
+                        </li>
+                        <li>
+                            <a class="nav-link text-white"
+                               asp-controller="Account" asp-action="Lab_52">Lab 5-2</a>
+                        </li> *@
+                        <li>
+                            <a class="nav-link text-white"
+                               asp-controller="Account" asp-action="Courts">สนาม</a>
+                        </li>
+                        <li>
+                            <a class="nav-link text-white"
+                               asp-controller="Account" asp-action="Booking">ประวัติการจอง</a>
+                        </li>
+                        @* @if (Context.Session.GetInt32("AccessLevel") >= 3)
+                        {
+                            <li>
+                                <a class="nav-link text-white"
+                                   asp-controller="Account" asp-action="Lab8">User Management</a>
+                            </li>
+                        } *@
+                        @* <li class="nav-item">
+                            <span class="nav-link text-white">ติดต่อเรา </span>
+                        </li>
+                        <li>
+                            <a class="nav-link text-white"
+                               asp-controller="Account" asp-action="User_manager">User Manager</a>
+                        </li> *@
+                    </ul>
+
+                    <!-- Right side -->
+                    <div class="d-flex align-items-center gap-3">
+                        @if (Context.Session.GetInt32("AccessLevel") >= 2)
+                        {
+                            <a asp-controller="Admin" asp-action="Bookings"
+                               class="btn btn-dark btn-sm">Admin Panel</a>
+                        }
+                        <span class="text-white">
+                            @if (Context.Session.GetInt32("IsMember") == 1)
+                            {
+                                <span title="Member">&#128081;</span>
+                            }
+                            @Context.Session.GetString("Username")
+                        </span>
+                        <a asp-controller="Account" asp-action="setting" class="btn btn-outline-light btn-sm">setting</a>
+                        @* <button class="btn btn-success btn-sm">login</button>
+                        <button class="btn btn-danger btn-sm">register</button> *@
+                        @if (Context.Session.GetString("UserId") != null)
+                        {
+                            <a class="btn btn-danger btn-sm"
+                               asp-controller="Account" asp-action="Logout">logout</a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-success btn-sm"
+                               asp-controller="Account" asp-action="Login">login</a>
+                            <a class="btn btn-danger btn-sm"
+                               asp-controller="Account" asp-action="Register">register</a>
+                        }
+
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <!-- ===== Main Content ===== -->
+    <main role="main" class="container-fluid py-3">
+    @RenderBody()
+    </main>
+
+
+    <!-- ===== Footer ===== -->
+    <footer class="border-top text-muted mt-auto">
+        <div class="container py-3 text-center">
+            &copy; 2026 - web name -
+            <a asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

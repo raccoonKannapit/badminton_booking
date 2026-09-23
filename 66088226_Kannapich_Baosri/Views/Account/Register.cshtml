@@ -1,0 +1,88 @@
+@{
+    ViewData["Title"] = "Register";
+    Layout = "_Kannapich";
+}
+@model _66088226_Kannapich_Baosri.ViewModels.RegisterViewModel
+
+<div class="auth-wrapper">
+    <div class="auth-card">
+
+        <div class="auth-header">
+            <h4 class="mb-1">Create an account</h4>
+            <p class="text-muted mb-0">Fill in your details to get started</p>
+        </div>
+
+        <form asp-controller="Account" asp-action="Register">
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input type="text" asp-for="Username" class="form-control auth-input" placeholder="Enter username" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" asp-for="Email" class="form-control auth-input" placeholder="Enter email" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Phone</label>
+                <input type="tel" asp-for="Phone" class="form-control auth-input" placeholder="Enter phone number" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" asp-for="Password" class="form-control auth-input" placeholder="Enter password" />
+            </div>
+            <div class="mb-4">
+                <label class="form-label">Confirm Password</label>
+                <input type="password" class="form-control auth-input" placeholder="Confirm password" />
+            </div>
+            <button type="submit" class="btn auth-btn w-100">Register</button>
+            <p class="text-center text-muted mt-3 mb-0" style="font-size: .9rem;">
+                Already have an account? <a asp-controller="Account" asp-action="Login">Login</a>
+            </p>
+        </form>
+    </div>
+</div>
+
+<style>
+    .auth-wrapper {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .auth-card {
+        width: 100%;
+        max-width: 440px;
+        background: #fff;
+        border-radius: 16px;
+        padding: 2.5rem;
+        box-shadow: 0 8px 32px rgba(26, 111, 196, 0.12);
+        border-top: 4px solid #1a6fc4;
+    }
+    .auth-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    .auth-input {
+        border-radius: 10px;
+        border: 1px solid #d0dff0;
+        padding: .6rem 1rem;
+        background-color: #f7faff;
+    }
+    .auth-input:focus {
+        border-color: #1a6fc4;
+        box-shadow: 0 0 0 3px rgba(26,111,196,.12);
+        background-color: #fff;
+    }
+    .auth-btn {
+        background: linear-gradient(135deg, #1a6fc4, #41ace5);
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        padding: .65rem;
+        font-weight: 600;
+        letter-spacing: .03em;
+    }
+    .auth-btn:hover {
+        background: linear-gradient(135deg, #155da0, #2e96d0);
+        color: #fff;
+    }
+</style>

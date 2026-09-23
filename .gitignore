@@ -1,0 +1,6 @@
+*.zip
+.vscode/
+bin/
+obj/
+.vs/
+*.user
